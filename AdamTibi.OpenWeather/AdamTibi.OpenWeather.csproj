@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/AdamTibi/OpenWeatherClient</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>openweather</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 namespace AdamTibi.OpenWeather;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-public class OneCallResponse
+public record OneCallResponse
 {
     [JsonProperty("lat")]
     public double Lat { get; set; }
@@ -22,7 +22,7 @@ public class OneCallResponse
     public Daily[] Daily { get; set; }
 }
 
-public class Daily
+public record Daily
 {
     [JsonProperty("dt"), JsonConverter(typeof(UnixDateTimeConverter))]
     public DateTime Dt { get; set; }
@@ -85,7 +85,7 @@ public class Daily
     public double? Snow { get; set; }
 }
 
-public class FeelsLike
+public record FeelsLike
 {
     [JsonProperty("day")]
     public double Day { get; set; }
@@ -100,7 +100,7 @@ public class FeelsLike
     public double Morn { get; set; }
 }
 
-public class Temp
+public record Temp
 {
     [JsonProperty("day")]
     public double Day { get; set; }
@@ -121,7 +121,7 @@ public class Temp
     public double Morn { get; set; }
 }
 
-public class Weather
+public record Weather
 {
     [JsonProperty("id")]
     public long Id { get; set; }

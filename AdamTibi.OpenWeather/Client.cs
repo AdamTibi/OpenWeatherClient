@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Web;
+﻿using System.Web;
 using Newtonsoft.Json;
 
 namespace AdamTibi.OpenWeather;
@@ -16,7 +15,7 @@ public class Client : IClient
         _httpClient = httpClient;
     }
 
-    public async Task<OneCallResponse> OneCallAsync(decimal latitude, decimal longitude, Excludes[] excludes, Units unit)
+    public async Task<OneCallResponse> OneCallAsync(decimal latitude, decimal longitude, IEnumerable<Excludes> excludes, Units unit)
     {
         const string ONECALL_URL_TEMPLATE = "/onecall";
         var uriBuilder = new UriBuilder(BASE_URL + ONECALL_URL_TEMPLATE);
@@ -24,7 +23,7 @@ public class Client : IClient
         query["lat"] = latitude.ToString();
         query["lon"] = longitude.ToString();
         query["appid"] = _apiKey;
-        if (excludes != null && excludes.Any())
+        if (excludes is { } && excludes.Any())
         {
             query["exclude"] = string.Join(',', excludes).ToLower();
         }
@@ -41,7 +40,7 @@ public class Client : IClient
 
         OneCallResponse? oneCallResponse = JsonConvert.DeserializeObject<OneCallResponse>(jsonResponse);
 
-        if (oneCallResponse == null)
+        if (oneCallResponse is null)
         {
             // This will never be hit
             throw new Exception();
